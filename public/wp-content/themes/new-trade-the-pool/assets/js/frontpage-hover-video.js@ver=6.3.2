@@ -1,0 +1,121 @@
+let fp_videoslider = new Swiper(".fp-videoslider__slider",{
+	   simulateTouch: true,
+   // Чувствительность свайпа
+   touchRation: 1,
+   // Угол срабатывания свайпа/перетаскивания
+   touchAngle: 45,
+   // Курсор перетаскивания
+	grabCursor: true, 
+	slidesPerView: 4,
+    spaceBetween: 28,
+	loop: true,
+	speed: 1000,	
+	navigation: {
+	  nextEl: ".fp-videoslider__arrow--next",
+	  prevEl: ".fp-videoslider__arrow--prev"
+	},
+	on: {
+		slideChange: stopAllVideos
+	},		
+	on: {
+		dragStart: stopAllVideos
+	},	
+	breakpoints: {
+		360: {
+			slidesPerView: 1,
+			spaceBetween: 20,
+		},	  
+		640: {
+			slidesPerView: 2, 
+			spaceBetween: 20
+		},
+		991: {
+			slidesPerView: 3,
+			spaceBetween: 20
+		},	
+		1600: {
+			slidesPerView: 4,
+			spaceBetween: 20
+		},		
+	},
+});
+
+function stopAllVideos() {
+	fp_videoslider.slides.forEach(function (slide) {
+		slide.player.pauseVideo();
+		/*slide.style.transform = 'scale(1)';*/
+	});
+}
+
+
+		var players = [];
+		
+		if (window.innerWidth>991) {
+
+			function onyoutuIframeAPIReady() {
+				// Инициализация плееров при загрузке API
+				var videoContainers = document.querySelectorAll('.video-container');
+				videoContainers.forEach(function(container) {
+					var player = new YT.Player(container, {
+						height: '100%',
+						width: '100%',
+						videoId: container.getAttribute('data-video-id'),
+						events: {
+							'onReady': onPlayerReady
+						}
+					});
+					players.push(player);
+				});
+			}
+
+			function onPlayerReady(event) {
+				// Все плееры готовы
+				// Мы можем использовать event.target для доступа к каждому плееру
+				var player = event.target;
+				var container = player.getIframe().parentNode;
+
+				// Добавляем обработчики событий для воспроизведения и остановки при наведении и убирании мыши
+				container.addEventListener('mouseenter', function() {
+					player.playVideo();
+				});
+
+				container.addEventListener('mouseleave', function() {
+					player.pauseVideo();
+				});
+			}
+		} else {
+			
+
+			function onyoutuIframeAPIReady() {
+				// Инициализация плееров при загрузке API
+				var videoContainers = document.querySelectorAll('.video-container');
+				videoContainers.forEach(function(container) {
+					var player = new YT.Player(container, {
+						height: '100%',
+						width: '100%',
+						videoId: container.getAttribute('data-video-id'),
+						events: {
+							'onReady': onPlayerReadyMob
+						}
+					});
+					players.push(player);
+				});
+			}
+			
+			function onPlayerReadyMob(event) {
+				// Все плееры готовы
+				// Мы можем использовать event.target для доступа к каждому плееру
+				var player = event.target;
+				var container = player.getIframe().parentNode;
+
+				/* Добавляем обработчики событий 
+				container.addEventListener('click', function() {
+					player.playVideo();
+				});*/
+				container.addEventListener('click', function() {
+                    // Если видео воспроизводится, по клику оно будет приостановлено, иначе начнется воспроизведение
+                    player.getPlayerState() === YT.PlayerState.PLAYING ? player.pauseVideo() : player.playVideo();
+                });
+			}
+			
+		}

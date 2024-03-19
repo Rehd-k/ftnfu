@@ -1,0 +1,679 @@
+
+
+  let w = $(window).width();
+  if (w <= 1023) {
+	jQuery('.header .header__menu .menu-item-has-children>a').click(function (e) {
+	  jQuery(this).toggleClass('item_opened');
+	  jQuery('.header .header__menu .menu-item-has-children .sub-menu').slideToggle();
+	});
+	
+	let els = jQuery('.modal-compact');
+	els.each(function() {
+		jQuery(this).click(function(){
+			//console.log( jQuery(this) );
+			jQuery(this).find('.footer__slide-items').slideToggle();
+		});
+	});
+  }	
+  
+let buttonLoadMoreTableRows = jQuery('.load-more-table-rows');
+if (buttonLoadMoreTableRows) {
+	buttonLoadMoreTableRows.click(function(e){
+		e.preventDefault();
+		jQuery('tr.hide-row').removeClass('hide-row');
+		buttonLoadMoreTableRows.addClass('hide-row');
+	});
+}
+
+new Swiper(".feedback__slider", {
+	slidesPerView: 2,
+	spaceBetween: 30,
+	loop: true,
+	autoplay: {
+	  delay: 5000,
+	  disableOnInteraction: false,
+	},
+	speed: 3000,
+	navigation: {
+	  nextEl: ".feedback__arrow--next",
+	  prevEl: ".feedback__arrow--prev",
+	},
+  breakpoints: {
+	320: {
+		slidesPerView: 1,
+	},
+	767: {
+		slidesPerView: 2,
+	},
+  },
+});
+
+
+let swiper = new Swiper(".advantages-block__slider",{
+	slidesPerView: 1,
+	/* effect: "flip", */
+	grabCursor: true,	
+	loop: true,
+	autoHeight: true,
+	
+	autoplay: {
+	  delay: 5000,
+	  disableOnInteraction: false,
+	},
+	speed: 7000,	
+	
+	navigation: {
+	  nextEl: ".advantages__arrow--next",
+	  prevEl: ".advantages__arrow--prev",
+	},
+	on: {
+		init() {
+		  this.el.addEventListener('mouseenter', () => {
+			this.autoplay.stop();
+		  });
+
+		  this.el.addEventListener('mouseleave', () => {
+			this.autoplay.start();
+		  });
+		},	
+	},
+});
+
+
+let frontTeamSlider = new Swiper(".frontpage-team__slider",{
+	loop: true,
+	spaceBetween: 20,
+	slidesPerView: 5,
+	slidesPerGroup: 1,
+	speed: 1000,	
+	navigation: {
+	  nextEl: ".frontpage-team__arrow--next",
+	  prevEl: ".frontpage-team__arrow--prev"
+	},
+  breakpoints: {
+	360: {
+		slidesPerView: 1,
+		spaceBetween: 0,
+	},	  
+	390: {
+		slidesPerView: 2,
+		spaceBetween: 10,
+	},	
+	767: {
+		slidesPerView: 3,
+		spaceBetween: 20
+	},
+	991: {
+		slidesPerView: 4,
+		spaceBetween: 20
+	},	
+	1599: {
+		slidesPerView: 5,
+		spaceBetween: 20
+	},		
+  },
+});
+
+
+
+/* Обработчики событий для кнопок управления
+document.querySelector('.frontpage-team__arrow--next').addEventListener('click', function () {
+  frontTeamSlider.slideNext(); // Перейти к следующему слайду
+});
+
+document.querySelector('.frontpage-team__arrow--prev').addEventListener('click', function () {
+  frontTeamSlider.slidePrev(); // Перейти к предыдущему слайду
+});
+*/
+
+/*--- Trading Plans click on info-point ---*/
+let points = jQuery('.info-point');
+
+points.each(function(i, el){
+	jQuery(this).click(function(e){
+		e.preventDefault();
+		
+		let c = e.target;
+		let father = jQuery(c).closest('li');
+		jQuery('.info-point__desc').removeClass('show');
+		jQuery(father).find('.info-point__desc').addClass('show');
+		
+		jQuery(father).find('.info-point__desc').click(function(){
+			jQuery(father).find('.info-point__desc').removeClass('show');
+		});
+		jQuery(father).find('.info-point__desc::after').click(function(){
+			jQuery(father).find('.info-point__desc').removeClass('show');
+		});
+	});
+});
+
+$(document).click(function (e) {
+	//console.log( e.target );
+	if ($(e.target).is('.packages .packages__content, .packages__inners, .packages__inner, .packages__inner-header, .packages__inner-body, .packages__inner-body ul, .packages__inner-body ul li')) {
+		$(".info-point__desc.show").removeClass('show');
+	}
+});
+
+
+/*--- Tabs on Front Page .advantages --- */
+jQuery( ".block-tabs__tab" ).click(function(e) {
+	e.preventDefault();
+	
+  let openEl = jQuery('#' + jQuery(this).data('id'));
+  jQuery(this).siblings().removeClass('active');
+  jQuery(this).addClass('active');
+  
+  jQuery(openEl).siblings().removeClass('active');
+  jQuery(openEl).addClass('active');
+
+});	
+
+
+new Swiper(".videotab-all", {
+	slidesPerView: 3,
+	spaceBetween: 30,
+	loop: true,
+/*	
+	autoplay: {
+	  delay: 5000,
+	  disableOnInteraction: false,
+	},
+*/	
+	speed: 1000,
+	navigation: {
+	  nextEl: ".videotab-all__arrow--next",
+	  prevEl: ".videotab-all__arrow--prev",
+	},
+  breakpoints: {
+	320: {
+		slidesPerView: 1,
+	},
+	640: {
+		slidesPerView: 2,
+	},
+	991: {
+		slidesPerView: 3,
+	},	
+  },
+});
+
+new Swiper(".videotab-rev", {
+	slidesPerView: 3,
+	spaceBetween: 30,
+	loop: true,
+/*	
+	autoplay: {
+	  delay: 5000,
+	  disableOnInteraction: false,
+	},
+*/
+	speed: 1000,
+	navigation: {
+	  nextEl: ".videotab-rev__arrow--next",
+	  prevEl: ".videotab-rev__arrow--prev",
+	},
+  breakpoints: {
+	320: {
+		slidesPerView: 1,
+	},
+	640: {
+		slidesPerView: 2,
+	},
+	991: {
+		slidesPerView: 3,
+	},	
+  },
+});
+
+
+new Swiper(".trustpilot-slider", {
+	slidesPerView: 4,
+	spaceBetween: 50,
+	loop: true,
+/*	
+	autoplay: {
+	  delay: 5000,
+	  disableOnInteraction: false,
+	},
+*/	
+	speed: 1000,
+	navigation: {
+	  nextEl: ".trustpilot-slider__arrow--next",
+	  prevEl: ".trustpilot-slider__arrow--prev",
+	},
+  breakpoints: {
+	320: {
+		slidesPerView: 1,
+		spaceBetween: 0,
+	},
+	640: {
+		slidesPerView: 2,
+	},
+	991: {
+		slidesPerView: 3,
+	},	
+	1200: {
+		slidesPerView: 4,
+	}		
+  },
+});
+
+/* -- Adding gtm tags  -- */
+/* Blog. Right sidebar. Suscribing form. 
+	On submit  - we add data to dataLayer
+*/
+document.addEventListener('wpcf7mailsent', function (event) {
+	let id = event.detail.contactFormId;
+	if ( '1682' == id ) {
+		let email = event.detail.inputs[0].value;
+		//console.log(email);
+		window.dataLayer.push({
+			'event': 'subscribe_to_newsletter',
+			'email': email
+		})		
+	}
+}, false);  
+
+
+let buttonSearch = $('#btnSearch'); 
+if (buttonSearch) {
+	buttonSearch.click(function(){		
+		let searchValue = $('form#searchform input[name="s"]').val();
+		console.log(searchValue);
+		window.dataLayer.push({'event': 'search', 'search_term' : searchValue});
+	});
+}
+
+
+
+
+/*--- https://.com/funded-phase/ click on video (youtu) ---*/
+let ffVideo = $('.add_gtm_datalayer');
+if (ffVideo) {
+	
+	//console.log( ffVideo );
+	
+	function onyoutuPlayerAPIReady() {
+	  $('.add_gtm_datalayer').each(function(index) {
+		var videoId = $(this).data('video-id');
+
+		// Create an instance of the youtu player for each carousel item
+		var player = new YT.Player($(this)[0], {
+			width: '540',
+			height: '320',
+		  videoId: videoId,
+		  events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		  }
+		});
+
+		// Attach the player instance to the carousel item
+		$(this).data('player', player);
+	  });
+	}
+	//console.log( ffVideo );
+	
+
+	// Player is ready, you can do additional setup here if needed
+		function onPlayerReady(event) {
+		}
+
+	// This function will be called when the player's state changes
+		function onPlayerStateChange(event) {
+			
+		  var player = event.target;	  
+		  var duration = player.getDuration();
+		  var videoTitle = player.videoTitle;
+		  var currentTime = player.playerInfo.currentTime;
+		  var progress = (cleanTime() / duration) * 100;
+			progress =  progress.toFixed(1);
+		  var replay = 0;	
+		  var videoId = player.getVideoData().video_id;
+		  console.log( videoId );
+		  
+			function cleanTime() {
+			   return Math.round(player.playerInfo.currentTime);
+			};
+			
+		   switch (event.data) {
+			  case YT.PlayerState.PLAYING:
+				 if (cleanTime() == 0) {
+					//console.log(videoTitle +  ' started ' + progress + '%');
+					window.dataLayer.push({
+						event: 'watch_start',
+						video_title: videoTitle,
+						video_id: videoId,
+						video_player: "youtu"
+					});
+					
+				 } else {	
+					//console.log(videoTitle +  ' unpaused ' + progress + '%');
+					window.dataLayer.push({
+						event: 'unpause',
+						video_title: videoTitle,
+						video_id: videoId,
+						video_player: "youtu"
+					});
+				 };
+				 break;
+				 
+			  case YT.PlayerState.PAUSED:
+				 if (duration - currentTime != 0) {
+					//console.log(title +  ' paused ' + progress + '%');
+					window.dataLayer.push({
+						event: 'pause',
+						video_title: videoTitle,
+						video_id: videoId,
+						video_player: "youtu"
+					});
+				 };
+				 break;
+			  case YT.PlayerState.ENDED:
+				//console.log(title + ' ended');
+				window.dataLayer.push({
+					event: 'watch_100%',
+					video_title: videoTitle,
+					video_id: videoId,
+					video_player: "youtu"
+				});
+				 break;
+		   };
+		};
+
+
+
+}
+
+/*--- https://.com/ click on video click on video (youtu) ---
+let mpp = $('.mainpage_vimeo_add_gtm_datalayer_click');
+
+if (mpp) {
+	
+	let iframe1 = $('.mainpage_vimeo_add_gtm_datalayer_click iframe');
+	let options1 = {
+		//'id':'841791494', 
+		'loop': 'false'
+		};
+			
+	let player1 = new Vimeo.Player(iframe1, options1);
+	let videoTitle;
+	let videoId;
+	let videoSrc;
+	let videoDuration;
+	let replay = 0;
+	
+	player1.getVideoTitle().then(function(title) {
+		videoTitle = title;
+	});	
+	player1.getVideoUrl().then(function(url) {
+		videoSrc = url;
+	});
+	player1.getVideoId().then(function(id) {
+		videoId = id;
+	});
+	player1.getDuration().then(function(duration) {
+		videoDuration = duration;
+	});
+		
+	player1.on('playing', function(data) {
+		if (data.percent == 0) {
+			eventName = "watch_start";
+		} 
+		if (data.percent > 0 && data.percent < 1) {
+			eventName = "unpause";
+		}	
+		if (replay > 0) {
+			eventName = "playback";
+		} 		
+		
+		window.dataLayer.push({
+			event: eventName,
+			video_title: videoTitle,
+			video_id: videoId,
+			video_player: "vimeo"
+		});
+		//console.log( props );
+	});
+
+	player1.on('pause', function(data) {
+		if (data.percent<1) {
+			window.dataLayer.push({ 
+				event: "pause",
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+		}
+	});
+		
+
+	player1.on('volumechange', function(data) {
+		let isMuted = data.volume;
+		
+		if (isMuted) {
+			window.dataLayer.push({  
+				event: 'mute',
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+		} else {
+		  window.dataLayer.push({
+				event: 'unmute',
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+		}
+	});
+	  
+	player1.on('fullscreenchange', function(data) {
+		let isFullscreen = data.fullscreen;
+
+		if (isFullscreen) {
+			window.dataLayer.push({
+				event: 'enter_fullscreen',
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+			
+		} else {
+			window.dataLayer.push({
+				event: 'exist_fullscreen',
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+			
+		}
+	});	  
+	
+	
+	player1.on('timeupdate', function(data) {
+		 //console.log( data );
+		let currentTime = data.seconds;
+		let duration = data.duration;
+		let progress = (currentTime / duration) * 100;
+		progress =  progress.toFixed(2);
+		//console.log(progress); 
+		
+		let eventName;
+		
+		if( progress == 100) {
+			replay++; 
+			eventName = "watch_100%";
+			window.dataLayer.push({  
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );			
+		}
+		if ( progress > 75 && progress < 75.5) {
+			eventName = "watch_75%";
+			window.dataLayer.push({
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );			
+		}
+		if ( progress > 50 && progress < 50.5) {
+			eventName = "watch_50%";
+			window.dataLayer.push({  
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );			
+		}		
+		if ( progress > 25 && progress < 25.5) {
+			eventName = "watch_25%";
+			window.dataLayer.push({  
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );			
+		}		
+		if ( progress > 10 && progress < 10.5) {
+			eventName = "watch_10%";
+			window.dataLayer.push({
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );			
+		}
+		if ( progress > 5 && progress < 5.5) {
+			eventName = "watch_5%";
+			window.dataLayer.push({
+				event: eventName,
+				video_title: videoTitle,
+				video_id: videoId,
+				video_player: "vimeo"
+			});
+			//console.log( props );
+		
+		}
+
+	});
+	
+}
+*/
+
+/*--- https://.com/ click on video click on video (youtu) ---
+let fpvi = $('.frontpage_add_gtm_datalayer');
+if (fpvi) {
+	
+	$('.frontpage_add_gtm_datalayer .empty-pic').click(function(ev){
+		ev.preventDefault();		
+		//console.log( $(this) );
+		$(this).next('.block-tabs__item-video iframe').addClass('is-show');
+		$(this).addClass('is-hide');
+		let src = $(this).next('.block-tabs__item-video iframe').attr('src');
+		// console.log( $(this).next('.block-tabs__item-video iframe') );
+		console.log( src );
+		$(this).next('.block-tabs__item-video iframe').attr('src', src + '&autoplay=1');
+		
+		let title = $(this).next('.block-tabs__item-video iframe').attr('title');		
+		let arr1 = src.split('https://www.youtu.com/embed/');
+		let arr2 = arr1[1].split('?start');
+		let videoId = arr2[0];			
+		let props = {  
+			event: "subscribe_to_newsletter",
+			video_title: title,
+			video_id: videoId,
+			video_player: "youtu"
+		};
+		
+		console.log( props );
+		window.dataLayer.push({  
+			event: "subscribe_to_newsletter",
+			video_title: title,
+			video_id: videoId,
+			video_player: "youtu"
+		});
+	});	
+	
+}
+*/		
+
+
+function getScrollPercentage() {
+	/*
+		scrollTop - прокрученное расстояние от начала страницы до верхнего края окна браузера
+		windowHeight - высота окна браузера
+		documentHeight - высота страницы
+	*/
+	let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	let windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	let documentHeight = Math.max(
+		document.body.scrollHeight, 
+		document.body.offsetHeight, 
+		document.body.clientHeight,
+		document.documentElement.scrollHeight, 
+		document.documentElement.offsetHeight, 
+		document.documentElement.clientHeight
+	);
+	return ((scrollTop / (documentHeight - windowHeight)) * 100);
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+	window.onscroll = function() {
+		// Выполняем действие при каждой прокрутке страницы
+		let perc = getScrollPercentage(); // Выводим результат на экран
+		let num = perc.toFixed(4);
+			
+		
+		if( num == 100) {
+			//console.log('scroll_100%');
+			window.dataLayer.push({event: "scroll_100%"});
+		}
+		if ( num > 75 && num < 76) {
+			//console.log('scroll_75%');
+			window.dataLayer.push({event: "scroll_75%"});
+		}
+		if ( num > 50 && num < 51) {
+			//console.log('scroll_50%');
+			window.dataLayer.push({event: "scroll_50%"});
+		}		
+		if ( num > 25 && num < 26) {
+			//console.log('scroll_25%');
+			window.dataLayer.push({event: "scroll_75%"});
+		}		
+		if ( num > 9 && num < 11) {
+			//console.log('scroll_10%');
+			window.dataLayer.push({event: "scroll_10%"});
+		}		
+	};
+	
+	
+	
+
+	/* Scroll to anchor on post */
+	jQuery(".js-anchor").on("click", "a", function (event) {
+		event.preventDefault();
+		var id = jQuery(this).attr('href'),
+			top = jQuery(id).offset().top - 80;
+			
+		jQuery('body,html').animate({scrollTop: top}, 1000);
+	});
+	
+});
+		
+/* == Adding gtm tags == */
+

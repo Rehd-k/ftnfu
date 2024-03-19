@@ -1,0 +1,6 @@
+.bg-img {
+    background-image: url('/regPic.jpg');
+    background-attachment: absolute;
+    background-position: center center;
+    background-size: cover;
+}
