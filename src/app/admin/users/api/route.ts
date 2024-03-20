@@ -37,3 +37,13 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(accountUpdate);
 }
+
+
+export async function DELETE(request: NextRequest) {
+    await dbConnect()
+    const accountId = request.nextUrl.searchParams.get("id");
+
+    const accountUpdate = await Account.findByIdAndDelete(accountId)
+
+    return NextResponse.json(accountUpdate);
+}

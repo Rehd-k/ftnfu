@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import DoTrade from "./doTrades";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function UserAccounts({ props }: any) {
     const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function UserAccounts({ props }: any) {
 
 
     const doUpdate = async () => {
+        toast("updateing")
         let status
         if (props.status !== 'active') {
             status = 'active'
@@ -23,6 +25,13 @@ export default function UserAccounts({ props }: any) {
         await axios.put(`/admin/users/api?id=${props._id}`, {
             status
         })
+        toast('Updated')
+    }
+
+    const doDelete = async () => {
+        toast('deleting')
+        await axios.delete(`/admin/users/api?id=${props._id}`)
+        toast('Deleted')
     }
 
     return <>
@@ -32,7 +41,7 @@ export default function UserAccounts({ props }: any) {
                     {props.accountType}
                 </span>
 
-                <IconButton>
+                <IconButton onClick={doDelete}>
                     <Delete className="text-gray-10" />
                 </IconButton>
             </div>
@@ -114,6 +123,7 @@ export default function UserAccounts({ props }: any) {
 
             </div>
         </div>
+        <ToastContainer />
 
         <DoTrade isOpen={open} handleClose={handleClose} neededInfo={props} />
     </>

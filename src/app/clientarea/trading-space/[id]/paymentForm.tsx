@@ -245,7 +245,7 @@ export default function PaymentForm({ accountInfo, user }: any) {
                     />
                 </div>
 
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              
                     <div className="col-span-4" >
                         <Image alt="" src={'/bitcoin.png'} height={32} width={32} className="mx-auto" />
 
@@ -254,7 +254,7 @@ export default function PaymentForm({ accountInfo, user }: any) {
                             3AmczENft2bdF1BvimWBV8CkAJuSCo9hq9
                         </div>
                     </div>
-                </Typography>
+               
 
                 <div className="w-full flex justify-center py-5">
                     <Button variant="outlined" onClick={account}>
