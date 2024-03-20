@@ -3,13 +3,17 @@
 import { useState } from "react";
 import PlanForm from "./form";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AccountCard({ props }:any) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose= () => setOpen(false) ;
     const deletePlan = async () => {
+        toast("loading...")
         await axios.delete(`/admin/accounts/api?id=${props._id}`)
+        toast("deleted", { type: "success" })
+        window.location.reload()
         }
 
     return <>
