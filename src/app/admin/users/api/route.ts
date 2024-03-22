@@ -31,7 +31,14 @@ export async function PUT(request: NextRequest) {
     console.log(accountId)
     const body = await request.json()
     const accountUpdate = await Account.findById(accountId)
-    accountUpdate.status = body.status
+    if (body.status) {
+        accountUpdate.status = body.status
+    }
+
+    if (body.balance) {
+        accountUpdate.balance = body.balance
+    }
+    
 
     await accountUpdate.save();
 

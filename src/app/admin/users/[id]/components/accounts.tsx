@@ -7,11 +7,17 @@ import { useState } from "react";
 import DoTrade from "./doTrades";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import DoAccount from "./doBalance";
 
 export default function UserAccounts({ props }: any) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
+    const [balanceOpen, setBalanceOpen] = useState(false);
+    const handleBalanceOpen = () => setBalanceOpen(true);
+    const handleBalanceClose = () => setBalanceOpen(false);
 
 
     const doUpdate = async () => {
@@ -112,13 +118,25 @@ export default function UserAccounts({ props }: any) {
                 </button>
 
 
+                {props.status !== 'active' ?
+                    <button
+                        onClick={doUpdate}
+                        className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                        Activate
+                    </button> : <button
+                        onClick={doUpdate}
+                        className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                        Deactivate
+                    </button>
+                }
+
+
+
 
                 <button
-                    onClick={doUpdate}
-                    className="w-full py-2 mt-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                    {props.status !== 'active' ?
-                        'Activate' : 'Deactivate'
-                    }
+                    onClick={handleBalanceOpen}
+                    className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    Balance
                 </button>
 
             </div>
@@ -126,5 +144,7 @@ export default function UserAccounts({ props }: any) {
         <ToastContainer />
 
         <DoTrade isOpen={open} handleClose={handleClose} neededInfo={props} />
+
+        <DoAccount isOpen={balanceOpen} handleClose={handleBalanceClose} neededInfo={props} />
     </>
 }
