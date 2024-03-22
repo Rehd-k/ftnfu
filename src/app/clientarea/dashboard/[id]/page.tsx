@@ -27,13 +27,13 @@ export default async function Dashboard(
     })
 
     const accountStat = await AccountStat.findOne({
-        user : account.user
+        user: account.user
     })
 
     const trades = await Trade.find({
         account: params.id
     })
-    
+
 
     trades.map((res) => {
         if (res.exitPrice === '0') {
@@ -47,6 +47,9 @@ export default async function Dashboard(
     if (!params.id) {
         redirect('/clientarea/accounts-overview')
     }
+
+    const d = new Date();
+    let year = d.getFullYear();
     return <>
         <div className="min-h-screen dark:bg-gray-800 bg-gray-100 text-gray-500 dark:text-gray-200 pt-16 md:px-5 px-2 md:text-md text-sm">
 
@@ -63,7 +66,7 @@ export default async function Dashboard(
             </div>
 
             <div className="py-5 flex justify-center items-center dark:text-gray-100">
-                Funded Trades  Now For You - Copyright @ 2023
+                Funded Trades  Now For You - Copyright @ {year}
             </div>
         </div>
 
