@@ -9,7 +9,7 @@ export default async function TradingSpace() {
         await dbConnect()
         accounts = await TradingAccount.find()
     } catch (err) {
-        throw new Error(err as string)
+        throw new Error(err as string) 
     }
     return <>
         <div className="bg-gray-300 dark:bg-gray-800 min-h-screen">
@@ -17,7 +17,7 @@ export default async function TradingSpace() {
                 {
                     accounts.map((res: any, index: Key | null | undefined) => {
                         return <span key={index}>
-                            <PlanCard props={res} />
+                            <PlanCard prop={JSON.parse(res)} />
                         </span>
 
                     })

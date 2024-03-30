@@ -5,7 +5,8 @@ import PlanForm from "./form";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function AccountCard({ props }:any) {
+export default function AccountCard({ prop }:any) {
+    const props = JSON.parse(prop)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose= () => setOpen(false) ;

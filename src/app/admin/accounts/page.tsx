@@ -9,7 +9,11 @@ export default async function Accounts() {
     let accounts = []
     try {
         await dbConnect()
-        accounts = await TradingAccount.find()
+        accounts = []
+        const tradesthem = await TradingAccount.find()
+        for (const res of tradesthem) {
+            accounts.push(res)
+        }
     } catch (err) {
         throw new Error(err as string)
     }
@@ -19,7 +23,7 @@ export default async function Accounts() {
                 {
                     accounts.map((res: any, index: Key | null | undefined) => {
                         return <span key={index}>
-                            <AccountCard props={res} />
+                            <AccountCard prop={JSON.stringify(res)} />
                         </span>
 
                     })

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-export default function PlanCard({ props }: any) {
+export default function PlanCard({ prop }: any) {
+    const props = JSON.parse(prop)
     return <div className="rounded-lg w-full bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-100">
         <div className="bg-blue-700 text-gray-100 h-16 font-bold flex justify-center items-center rounded-t-lg">
             {props.name}
