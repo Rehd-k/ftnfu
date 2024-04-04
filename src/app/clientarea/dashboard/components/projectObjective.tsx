@@ -2,6 +2,7 @@ import HelpOutline from "@mui/icons-material/HelpOutline";
 import IconButton from "@mui/material/IconButton";
 import CalendarToday from "@mui/icons-material/CalendarToday"
 import Box from "@mui/material/Box";
+import { CurrencyExchange } from "@mui/icons-material";
 
 
 export default function ProgramObjectives({ account, trades }: any) {
@@ -13,7 +14,46 @@ export default function ProgramObjectives({ account, trades }: any) {
     }
 
     return <div className="mt-2 grid md:grid-cols-5 grid-cols-1 md:gap-5 w-full">
-        <div className="col-span-3">
+        <div className="col-span-2 w-full mt-10 md:mt-0">
+            <div className="flex">
+                <IconButton>
+                    <CalendarToday fontSize="small" />
+                </IconButton>
+
+                <p className="text-xl">
+                    Stats
+                </p>
+
+            </div>
+
+            <div className="w-full shadow-lg bg-white dark:bg-gray-700 gap-5  rounded-lg mt-2 md:p-5 p-2 grid grid-cols-2">
+                <div className="border bg-blue-100 rounded p-3">
+                    <CurrencyExchange className="text-blue-800 text-lg" />
+                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-blue-800 mt-3 font-bold">Balance</div>
+                </div>
+
+                <div className="border bg-blue-100 rounded p-3">
+                    <CurrencyExchange className="text-blue-800 text-lg" />
+                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-blue-800 mt-3 font-bold">Profti/Loss</div>
+                </div>
+
+                <div className="border bg-blue-100 rounded p-3">
+                    <CurrencyExchange className="text-blue-800 text-lg" />
+                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-blue-800 mt-3 font-bold">Drawdown</div>
+                </div>
+
+                <div className="border bg-blue-100 rounded p-3">
+                    <CurrencyExchange className="text-blue-800 text-lg" />
+                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-blue-800 mt-3 font-bold">Trading Days</div>
+                </div>
+            </div>
+        </div>
+        
+        <div className="col-span-3 md:order-first">
             <div className="font-semibold">
                 Program Objectives
             </div>
@@ -124,63 +164,6 @@ export default function ProgramObjectives({ account, trades }: any) {
                 </div>
             </div>
         </div>
-        <div className="col-span-2 w-full mt-10 md:mt-0">
-            <div className="flex justify-between">
-                <p>
-                    Daily Performance
-                </p>
 
-
-                <IconButton>
-                    <CalendarToday fontSize="small" />
-                </IconButton>
-            </div>
-
-            <div className="w-full h-64 shadow-lg bg-white dark:bg-gray-700  rounded-lg mt-2 md:p-5 p-2">
-                <div className="flex justify-between md:text-sm text-xs text-gray-500 dark:text-gray-400">
-                    <p className="">
-                        Remaining Risk Today
-                    </p>
-
-                    <p className="">
-                        2000
-                    </p>
-                </div>
-
-                <div className="flex justify-between md:text-sm text-xs text-gray-500 dark:text-gray-400 mt-10">
-                    <p className="">
-                        Realized P&L:
-                    </p>
-
-                    <p className="">
-                        -
-                    </p>
-                </div>
-
-                <div className="flex justify-between md:text-sm text-xs text-gray-500 dark:text-gray-400 mt-10">
-                    <p className="">
-                        Market Value:
-                    </p>
-
-                    <p className="">
-                        -
-                    </p>
-                </div>
-
-                <div className="flex justify-between md:text-sm text-xs text-gray-500 dark:text-gray-400 mt-10">
-                    <p className="">
-                        Total Volume:
-                    </p>
-
-                    <p className="">
-                        -
-                    </p>
-                </div>
-
-            </div>
-
-
-
-        </div>
     </div>
 }

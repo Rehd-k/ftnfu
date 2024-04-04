@@ -8,6 +8,8 @@ import { redirect } from "next/navigation";
 import TradingAccount from "@/model/tradingAccount";
 import Trade from "@/model/trades";
 import AccountStat from "@/model/accountStats";
+import DashboardDetails from "../components/toplaywer";
+import User from "@/model/user";
 
 
 
@@ -29,6 +31,8 @@ export default async function Dashboard(
     const accountStat = await AccountStat.findOne({
         user: account.user
     })
+
+    const userStats = await User.findById(account.user)
 
     const trades = await Trade.find({
         account: params.id
@@ -59,6 +63,7 @@ export default async function Dashboard(
 
 
             <div className="mt-10">
+                <DashboardDetails accounts={JSON.stringify(tradingAccount)} accountStats={JSON.stringify(account)} userStats={JSON.stringify(userStats)} />
                 <ProgramObjectives account={tradingAccount} trades={trades} />
                 <AccountPandL accountStat={accountStat} />
                 <OpenTrades trades={openTrades} header={'Open Trades'} />
