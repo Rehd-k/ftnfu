@@ -35,19 +35,19 @@ export default function ProgramObjectives({ account, trades }: any) {
 
                 <div className="border bg-blue-100 rounded p-3">
                     <CurrencyExchange className="text-blue-800 text-lg" />
-                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-base text-blue-800 mt-3">${account.ProfitLoss}</div>
                     <div className="text-blue-800 mt-3 font-bold">Profti/Loss</div>
                 </div>
 
                 <div className="border bg-blue-100 rounded p-3">
                     <CurrencyExchange className="text-blue-800 text-lg" />
-                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-base text-blue-800 mt-3">${account.Drawdown}</div>
                     <div className="text-blue-800 mt-3 font-bold">Drawdown</div>
                 </div>
 
                 <div className="border bg-blue-100 rounded p-3">
                     <CurrencyExchange className="text-blue-800 text-lg" />
-                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-base text-blue-800 mt-3">{account.TradingDays}</div>
                     <div className="text-blue-800 mt-3 font-bold">Trading Days</div>
                 </div>
             </div>

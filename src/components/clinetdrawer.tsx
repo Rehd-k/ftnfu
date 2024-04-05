@@ -76,9 +76,9 @@ export default function ClientDrawer({ user, children }: any) {
             link: "/clientarea/dashboard"
         },
         {
-            title: "Leader Board",
+            title: "Make Investment",
             icon: <LeaderboardOutlined />,
-            link: "/clientarea/leader-board"
+            link: "/clientarea/investment"
         },
         {
             title: "Profile",
