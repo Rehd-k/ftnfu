@@ -78,6 +78,21 @@ export default function UserAccounts({ props }: any) {
                 </li>
 
                 <li className="flex justify-between py-2 border-b border-gray-300">
+                    <p className="">Profit/Loss</p>
+                    <p className="">{props.ProfitLoss}</p>
+                </li>
+
+                <li className="flex justify-between py-2 border-b border-gray-300">
+                    <p className="">Drawdown</p>
+                    <p className="">{props.Drawdown}</p>
+                </li>
+
+                <li className="flex justify-between py-2 border-b border-gray-300">
+                    <p className="">Trading Days</p>
+                    <p className="">{props.TradingDays}</p>
+                </li>
+
+                <li className="flex justify-between py-2 border-b border-gray-300">
                     <p className="">Start Date</p>
                     <p className="">{format(props.startDate, 'LLLL d, yyyy')}</p>
 
@@ -136,7 +151,7 @@ export default function UserAccounts({ props }: any) {
                 <button
                     onClick={handleBalanceOpen}
                     className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                    Balance
+                    Update
                 </button>
 
             </div>

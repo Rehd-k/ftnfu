@@ -18,7 +18,23 @@ const AccountSchema = new mongoose.Schema({
         
     },
     balance: {
+        type: String
+        
+    },
+
+    ProfitLoss: {
         type: String,
+        default : '0'
+        
+    },
+    Drawdown: {
+        type: String,
+        default : '0'
+        
+    },
+    TradingDays: {
+        type: String,
+        default : '0'
         
     },
     startAmount: {

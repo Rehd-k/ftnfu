@@ -57,14 +57,14 @@ export default async function Dashboard(
     return <>
         <div className="min-h-screen dark:bg-gray-800 bg-gray-100 text-gray-500 dark:text-gray-200 pt-16 md:px-5 px-2 md:text-md text-sm">
 
-            <TopPart account={account} />
+            {/* <TopPart account={account} />
 
-            <FundLevel />
+            <FundLevel /> */}
 
 
-            <div className="mt-10">
+            <div className="mt-5">
                 <DashboardDetails accounts={JSON.stringify(tradingAccount)} accountStats={JSON.stringify(account)} userStats={JSON.stringify(userStats)} />
-                <ProgramObjectives account={tradingAccount} trades={trades} />
+                <ProgramObjectives account={account} trades={trades} />
                 <AccountPandL accountStat={accountStat} />
                 <OpenTrades trades={openTrades} header={'Open Trades'} />
                 <OpenTrades trades={closedTrades} header={'Closed Trades'} />

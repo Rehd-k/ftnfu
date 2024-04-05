@@ -28,18 +28,13 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
     await dbConnect()
     const accountId = request.nextUrl.searchParams.get("id");
-    console.log(accountId)
-    const body = await request.json()
+
+
     const accountUpdate = await Account.findById(accountId)
-    if (body.status) {
-        accountUpdate.status = body.status
+    const body = await request.json()
+    for (const key in body) {
+        accountUpdate[key] = body[key]
     }
-
-    if (body.balance) {
-        accountUpdate.balance = body.balance
-    }
-    
-
     await accountUpdate.save();
 
     return NextResponse.json(accountUpdate);

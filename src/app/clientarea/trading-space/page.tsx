@@ -17,7 +17,7 @@ export default async function TradingSpace() {
                 {
                     accounts.map((res: any, index: Key | null | undefined) => {
                         return <span key={index}>
-                            <PlanCard prop={JSON.parse(res)} />
+                            <PlanCard prop={JSON.stringify(res)} />
                         </span>
 
                     })

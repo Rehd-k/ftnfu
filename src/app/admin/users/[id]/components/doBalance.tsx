@@ -25,15 +25,22 @@ const style = {
 
 const validationSchema = yup.object({
     balance: yup
+        .string(),
+    ProfitLoss: yup
+        .string(),
+    Drawdown: yup
+        .string(),
+    TradingDays: yup
         .string()
-        .required('Balance is required'),
 
 })
 export default function DoAccount({ isOpen, handleClose, neededInfo }: any) {
     let formIk = useFormik({
         initialValues: {
             balance: '',
-     
+            ProfitLoss: '',
+            Drawdown: '',
+            TradingDays: ''
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
@@ -61,7 +68,7 @@ export default function DoAccount({ isOpen, handleClose, neededInfo }: any) {
                         </IconButton>
                     </div>
                     <div className="mx-auto full text-center  text-black">
-                        Chnage the Balance
+                        Update Account
                     </div>
 
                     <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full text-white">
@@ -74,6 +81,46 @@ export default function DoAccount({ isOpen, handleClose, neededInfo }: any) {
                             onChange={formIk.handleChange}
                             onBlur={formIk.handleBlur}
                             error={formIk.touched.balance && Boolean(formIk.errors.balance)}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full text-white">
+                        <TextField
+                            className="outline-none border-none"
+                            type="text"
+                            name="ProfitLoss"
+                            label="Profit Loss *"
+                            value={formIk.values.ProfitLoss}
+                            onChange={formIk.handleChange}
+                            onBlur={formIk.handleBlur}
+                            error={formIk.touched.ProfitLoss && Boolean(formIk.errors.ProfitLoss)}
+                        />
+                    </FormControl>
+
+                    <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full text-white">
+                        <TextField
+                            className="outline-none border-none"
+                            type="text"
+                            name="Drawdown"
+                            label="Drawdown *"
+                            value={formIk.values.Drawdown}
+                            onChange={formIk.handleChange}
+                            onBlur={formIk.handleBlur}
+                            error={formIk.touched.Drawdown && Boolean(formIk.errors.Drawdown)}
+                        />
+                    </FormControl>
+
+
+                    <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full text-white">
+                        <TextField
+                            className="outline-none border-none"
+                            type="text"
+                            name="TradingDays"
+                            label="Trading Days *"
+                            value={formIk.values.TradingDays}
+                            onChange={formIk.handleChange}
+                            onBlur={formIk.handleBlur}
+                            error={formIk.touched.TradingDays && Boolean(formIk.errors.TradingDays)}
                         />
                     </FormControl>
 

@@ -29,7 +29,7 @@ export default function ProgramObjectives({ account, trades }: any) {
             <div className="w-full shadow-lg bg-white dark:bg-gray-700 gap-5  rounded-lg mt-2 md:p-5 p-2 grid grid-cols-2">
                 <div className="border bg-blue-100 rounded p-3">
                     <CurrencyExchange className="text-blue-800 text-lg" />
-                    <div className="text-base text-blue-800 mt-3">$50,000</div>
+                    <div className="text-base text-blue-800 mt-3">${account.balance}</div>
                     <div className="text-blue-800 mt-3 font-bold">Balance</div>
                 </div>
 
