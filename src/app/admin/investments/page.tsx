@@ -3,7 +3,9 @@ import ShowInvestmentCards from "./components/showcards"
 import Investment from "@/model/investments"
 
 export default async function AdminInvestments() {
-    const investments = await Investment.find()
+    // const investments = await Investment.find()
+
+    const investments: any[] = []
     return <>
         <div className="md:w-11/12 mx-auto mt-5">
             {investments.length <= 0 ? <div>
