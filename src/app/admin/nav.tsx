@@ -67,9 +67,9 @@ export default function AdminNav({ children }: any) {
             link: "/admin/accounts"
         },
         {
-            title: "Trades",
+            title: "Investment",
             icon: <TrendingUpOutlined />,
-            link: "/admin/trades"
+            link: "/admin/investments"
         },
         {
             title: "Mail",

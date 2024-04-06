@@ -1,8 +1,22 @@
+'use client'
 import Link from "next/link";
+import CreateCard from "./createCard";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-export default function Investments({ prop }: any) {
+export default function ShowInvestmentCards({ prop }: any) {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const deletePlan = async () => {
+        toast("loading...")
+        await axios.delete(`/admin/investments/api?id=${props._id}`)
+        toast("deleted", { type: "success" })
+        window.location.reload()
+    }
+
     const props = JSON.parse(prop)
-
     return <>
         <div className="rounded-lg w-full bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-100">
             <div className="bg-blue-700 text-gray-100 h-16 font-bold flex justify-center items-center rounded-t-lg">
@@ -44,17 +58,18 @@ export default function Investments({ prop }: any) {
                     <p className="">{props.period}</p>
                 </li>
             </ul>
-
             <div className="mt-5 flex justify-between px-2 gap-5 pb-5">
+                <button onClick={handleOpen} className="w-full py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    Update
+                </button>
 
-                <Link href={`trading-space/${props._id}`} className="w-full">
-                    <button
-
-                        className="w-full py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                        Make Investment
-                    </button>
-                </Link>
+                <button onClick={deletePlan} className="w-full py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">
+                    Delete
+                </button>
             </div>
+
         </div>
+        <CreateCard isOpen={open} handleClose={handleClose} formContent={props} />
+
     </>
 }
