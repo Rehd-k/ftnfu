@@ -1,11 +1,11 @@
+import dbConnect from "@/helpers/dbConnect"
 import JustAdd from "./components/justadd"
 import ShowInvestmentCards from "./components/showcards"
 import Investment from "@/model/investments"
 
 export default async function AdminInvestments() {
-    // const investments = await Investment.find()
-
-    const investments: any[] = []
+    await dbConnect()
+    const investments = await Investment.find()
     return <>
         <div className="md:w-11/12 mx-auto mt-5">
             {investments.length <= 0 ? <div>

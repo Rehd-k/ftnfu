@@ -1,7 +1,15 @@
 import mongoose from "mongoose";
 
-const InvestmentSchema = new mongoose.Schema({
+const UserInvestmentSchema = new mongoose.Schema({
     user: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    ROI: {
         type: String,
         required: true
     },
@@ -36,6 +44,6 @@ const InvestmentSchema = new mongoose.Schema({
 
 })
 
-const Investment = mongoose.models.Investment || mongoose.model("Investment", InvestmentSchema);
+const UserInvestment = mongoose.models.UserInvestment || mongoose.model("UserInvestment", UserInvestmentSchema);
 
-export default Investment;
+export default UserInvestment;

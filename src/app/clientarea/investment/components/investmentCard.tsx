@@ -47,7 +47,7 @@ export default function Investments({ prop }: any) {
 
             <div className="mt-5 flex justify-between px-2 gap-5 pb-5">
 
-                <Link href={`trading-space/${props._id}`} className="w-full">
+                <Link href={`investment/${props._id}`} className="w-full">
                     <button
 
                         className="w-full py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">

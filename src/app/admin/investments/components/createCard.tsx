@@ -7,7 +7,7 @@ import axios from "axios"
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { IconButton, MenuItem, Select } from "@mui/material";
+import { IconButton, InputLabel, MenuItem, Select } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -36,8 +36,7 @@ const validationSchema = yup.object({
         .string()
         .required('Maximum is required'),
     payout: yup
-        .string()
-        .required("Payout Required"),
+        .string(),
 
     period: yup
         .string()
@@ -54,8 +53,8 @@ export default function CreateCard({ isOpen, handleClose, formContent }: any) {
                 ROI: formContent.ROI as ReactNode,
                 minimum: formContent.minimum as ReactNode,
                 maximum: formContent.maximum as ReactNode,
-                payout: formContent.payout as ReactNode,
-                period: '',
+                payout: '',
+                period: formContent.period as ReactNode,
             }
         } else {
             values = {
@@ -75,7 +74,7 @@ export default function CreateCard({ isOpen, handleClose, formContent }: any) {
         initialValues: initialValues(),
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            console.log(values);
+            toast("Loading...")
             let newUser
             if (formContent) {
                 newUser = await axios.put(`/admin/investments/api?id=${formContent._id}`, values)
@@ -105,7 +104,7 @@ export default function CreateCard({ isOpen, handleClose, formContent }: any) {
                         </IconButton>
                     </div>
                     <div className="mx-auto full text-center  text-black">
-                        Add New Plan
+                        {formContent ? 'Update Plan' : "Add New Plan"}
                     </div>
 
                     <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full text-white">
@@ -171,28 +170,14 @@ export default function CreateCard({ isOpen, handleClose, formContent }: any) {
                     </FormControl>
 
                     <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full">
-                        <TextField
-                            className="outline-none border-none"
-                            type="text"
+                        <InputLabel>Payout</InputLabel>
+                        <Select
+                            label="Payout"
                             name="payout"
-                            id=""
-                            label="Payout *"
-
                             value={formIk.values.payout}
                             onChange={formIk.handleChange}
                             onBlur={formIk.handleBlur}
                             error={formIk.touched.payout && Boolean(formIk.errors.payout)}
-                            helperText={formIk.touched.payout && formIk.errors.payout}
-                        />
-                    </FormControl>
-
-                    <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full">
-
-                        <Select
-                            value={formIk.values.period}
-                            label="Period"
-                            onChange={formIk.handleChange}
-                            onBlur={formIk.handleBlur}
                         >
                             <MenuItem value={'Daily'}>Daily</MenuItem>
                             <MenuItem value={'Weekly'}>Weekly</MenuItem>
@@ -200,6 +185,24 @@ export default function CreateCard({ isOpen, handleClose, formContent }: any) {
                             <MenuItem value={'Yearly'}>Yearly</MenuItem>
                         </Select>
                     </FormControl>
+
+                    <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full">
+                        <TextField
+                            className="outline-none border-none"
+                            type="text"
+                            name="period"
+                            id=""
+                            label="Period (in days)"
+                            placeholder="7"
+                            value={formIk.values.period}
+                            onChange={formIk.handleChange}
+                            onBlur={formIk.handleBlur}
+                            error={formIk.touched.period && Boolean(formIk.errors.period)}
+                            helperText={formIk.touched.period && formIk.errors.period}
+                        />
+                    </FormControl>
+
+
 
                     <div className="flex justify-center pt-5">
 
