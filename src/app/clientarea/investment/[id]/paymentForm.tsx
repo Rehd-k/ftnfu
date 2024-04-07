@@ -44,7 +44,9 @@ export default function PaymentForm({ accountInfo, user }: any) {
         await axios.post('/clientarea/investment/api', {
             user: user._id,
             plan: accountInfo._id,
-            balance: amount
+            balance: amount,
+            name : accountInfo.name,
+            ROI : accountInfo.ROI
         })
         toast("You will be notified when your payment is confrimed", {
             type: "success"
