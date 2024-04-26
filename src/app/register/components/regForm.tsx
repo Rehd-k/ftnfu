@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { redirect } from "next/navigation";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import React from "react";
+import Script from "next/script";
 
 const validationSchema = yup.object({
     firstName: yup
@@ -70,7 +71,25 @@ export default function FormReg() {
     })
 
     return <form className="bg-white px-2 md:px-5 pb-10 h-screen md:h-full" onSubmit={formIk.handleSubmit}>
-        <div  className="mx-auto h-16 w-16 relative py-20">
+        <div className="gtranslate_wrapper"></div>
+
+        <Script
+            defer
+            src="https://cdn.gtranslate.net/widgets/latest/float.js"
+        />
+        <Script
+            defer
+            id="show-livechat"
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+                __html: `window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"languages":["en","fr","de","it","es"],"wrapper_selector":".gtranslate_wrapper"}`
+            }}
+            onLoad={() => {
+                console.log('Script has loaded')
+            }}
+        />
+
+        <div className="mx-auto h-16 w-16 relative py-20">
             <Link href="/">
                 <Image alt="logo" src="/logo.svg" fill />
             </Link>

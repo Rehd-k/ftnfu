@@ -24,6 +24,7 @@ import {
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import Script from "next/script";
 
 const drawerWidth = 240;
 
@@ -33,7 +34,7 @@ export default function ClientDrawer({ user, children }: any) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);
     React.useEffect(() => {
-        
+
     }, [pathname])
 
     const setMode = () => {
@@ -126,7 +127,24 @@ export default function ClientDrawer({ user, children }: any) {
         </div>
     );
 
-    return (
+    return <>
+        <div className="gtranslate_wrapper"></div>
+
+        <Script
+            defer
+            src="https://cdn.gtranslate.net/widgets/latest/float.js"
+        />
+        <Script
+            defer
+            id="show-livechat"
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+                __html: `window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"languages":["en","fr","de","it","es"],"wrapper_selector":".gtranslate_wrapper"}`
+            }}
+            onLoad={() => {
+                console.log('Script has loaded')
+            }}
+        />
         <Box sx={{ display: "flex" }}>
             {/* <CssBaseline /> */}
             <Box
@@ -216,5 +234,6 @@ export default function ClientDrawer({ user, children }: any) {
                 }
             </Box>
         </Box>
-    );
+    </>
+
 }
