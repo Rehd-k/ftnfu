@@ -12,14 +12,19 @@ export default async function UserInfo(
     console.log(userAccounts)
 
     return <>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-5 md:p-5 p-2.5 w-full bg-gray-50 dark:bg-gray-800 min-h-screen">
+    {userAccounts.length > 0 ?  <div className="grid md:grid-cols-2 grid-cols-1 gap-5 md:p-5 p-2.5 w-full bg-gray-50 dark:bg-gray-800 min-h-screen">
             {userAccounts.map((res, index) => {
                 return <span key={index}>
                     <UserAccounts dbprops={JSON.stringify(res)} />
                 </span>
             })
             }
+        </div>: <div className="h-screen w-full flex items-center justify-center font-bold text-2xl">
+            No Accounts yet
         </div>
+
+    }
+        
 
     </>
 }
