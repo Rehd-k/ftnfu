@@ -88,7 +88,8 @@ function createData(firstName: String, lastName: String, password: String, email
     return { firstName, lastName, password, email, country, status, Joined };
 }
 
-export default function UsersTable({ users }: any) {
+export default function UsersTable({ dbusers }: any) {
+    const users = JSON.parse(dbusers);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const router = useRouter()

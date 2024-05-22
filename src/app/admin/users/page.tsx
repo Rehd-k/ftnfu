@@ -4,8 +4,8 @@ import dbConnect from "@/helpers/dbConnect";
 
 export default async function UsersAdmin() {
     await dbConnect()
-    const users = await User.find()
+    const dbusers = await User.find()
     return <>
-        <UsersTable users={users} />
+        <UsersTable dbusers={JSON.stringify(dbusers)} />
     </>
 }

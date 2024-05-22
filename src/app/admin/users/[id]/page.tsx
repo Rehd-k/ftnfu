@@ -14,7 +14,7 @@ export default async function UserInfo(
         <div className="grid md:grid-cols-2 grid-cols-1 gap-5 md:p-5 p-2.5 w-full bg-gray-50 dark:bg-gray-800 min-h-screen">
             {userAccounts.map((res, index) => {
                 return <span key={index}>
-                    <UserAccounts props={res} />
+                    <UserAccounts dbprops={JSON.stringify(res)} />
                 </span>
             })
             }

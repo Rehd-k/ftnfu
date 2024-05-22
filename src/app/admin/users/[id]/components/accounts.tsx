@@ -9,7 +9,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import DoAccount from "./doBalance";
 
-export default function UserAccounts({ props }: any) {
+export default function UserAccounts({ dbprops }: any) {
+    const props = JSON.parse(dbprops);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);

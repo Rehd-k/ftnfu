@@ -250,8 +250,12 @@ export default function PaymentForm({ accountInfo, user }: any) {
                         <Image alt="" src={'/bitcoin.png'} height={32} width={32} className="mx-auto" />
 
 
-                        <div className="mt-10 text-center w-full">
+                        <div className="mt-10 text-center w-full hidden md:block">
                             3AmczENft2bdF1BvimWBV8CkAJuSCo9hq9
+                        </div>
+
+                        <div className="mt-10 text-center w-full  md:hidden">
+                            3AmczENft2bdF1Bvi mWBV8CkAJuSCo9hq9
                         </div>
                     </div>
                
