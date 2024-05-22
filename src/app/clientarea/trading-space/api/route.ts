@@ -26,14 +26,16 @@ export async function GET(request: NextRequest) {
 
 
 export async function POST(request: NextRequest) {
+   
     await dbConnect()
     const body = await request.json()
+    console.log(body.tradingPeriod)
     const account = await Account.create({
         user: body.user,
         accountType: body.accountType,
         accountNumber : nanoid(),
         balance: body.balance,
-        startAmount: body.balance,
+        startAmount: body.tradingPeriod,
         startDate: Date.now(),
         endDate: Date.now() + (1000 * 60 * 60 * 24 * Number(body.tradingPeriod))
     })

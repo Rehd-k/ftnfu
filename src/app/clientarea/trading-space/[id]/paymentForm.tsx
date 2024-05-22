@@ -17,7 +17,9 @@ const style = {
     px: 4,
 };
 
-export default function PaymentForm({ accountInfo, user }: any) {
+export default function PaymentForm({ dbaccountInfo, dbuser }: any) {
+    const [accountInfo, setAccountInfo] = useState(JSON.parse(dbaccountInfo))
+    const [user, setUser] = useState(JSON.parse(dbuser))
     const [paymentMethord, setPaymentMethord] = useState("crypto")
     const [open, setOpen] = useState(false);
     const router = useRouter();
@@ -32,7 +34,7 @@ export default function PaymentForm({ accountInfo, user }: any) {
             user: user._id,
             accountType: accountInfo.name,
             balance: accountInfo.buyingPower,
-            tradingPeriod: accountInfo.buyingPower,
+            tradingPeriod: accountInfo.tradingPeriod,
             accountId: accountInfo._id
         })
         toast("waiting to confirm payment...", {

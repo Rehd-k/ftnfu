@@ -9,6 +9,7 @@ export default async function UserInfo(
     const userAccounts = await Account.find({
         user: params.id
     })
+    console.log(userAccounts)
 
     return <>
         <div className="grid md:grid-cols-2 grid-cols-1 gap-5 md:p-5 p-2.5 w-full bg-gray-50 dark:bg-gray-800 min-h-screen">

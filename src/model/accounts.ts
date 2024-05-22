@@ -38,7 +38,7 @@ const AccountSchema = new mongoose.Schema({
         
     },
     startAmount: {
-        type: Number,
+        type: String,
         
     },
     startDate: {

@@ -10,10 +10,10 @@ export default async function BuyAccount(
 ) {
     await dbConnect()
     const session = await getServerSession(authOptions) as any
-    const user = await User.findById(session?.user.id)
-    let accountInfo = await TradingAccount.findById(params.id)
-    console.log(user)
+    const dbuser = await User.findById(session?.user.id)
+    let dbaccountInfo = await TradingAccount.findById(params.id)
+ 
     return <>
-        <PaymentForm accountInfo={accountInfo} user={user} />
+        <PaymentForm dbaccountInfo={JSON.stringify(dbaccountInfo)} dbuser={JSON.stringify(dbuser)} />
     </>
 }
