@@ -253,11 +253,11 @@ export default function PaymentForm({ dbaccountInfo, dbuser }: any) {
 
 
                         <div className="mt-10 text-center w-full hidden md:block">
-                            3AmczENft2bdF1BvimWBV8CkAJuSCo9hq9
+                            36JibBER63cF3tSrjQNq9MiRPnmV4E76s
                         </div>
 
                         <div className="mt-10 text-center w-full  md:hidden">
-                            3AmczENft2bdF1Bvi mWBV8CkAJuSCo9hq9
+                            36JibBER63cF3tSrjQD NqMiRPnmV4E76s
                         </div>
                     </div>
                
