@@ -2,20 +2,18 @@ import mongoose from "mongoose";
 
 const WalletSchema = new mongoose.Schema({
     address: {
-        type: String,
-        required: true
+        type: String
     },
     name: {
         type: String,
-        required: true,
+        default : 'BTC'
     },
     icon: {
-        type: String,
-        required: true
+        type: String
     },
     network: {
         type: String,
-        required: true
+        default: 'BITCOIN'
     },
     createdOn: {
         type: Number,

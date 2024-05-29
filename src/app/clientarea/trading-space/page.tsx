@@ -2,12 +2,14 @@ import dbConnect from "@/helpers/dbConnect"
 import TradingAccount from "@/model/tradingAccount"
 import { Key } from "react"
 import PlanCard from "./components/planCard"
+import Wallet from "@/model/walletAddress"
 
 export default async function TradingSpace() {
     let accounts = []
     try {
         await dbConnect()
         accounts = await TradingAccount.find()
+
     } catch (err) {
         throw new Error(err as string) 
     }

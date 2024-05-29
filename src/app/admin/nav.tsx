@@ -26,6 +26,7 @@ import {
     MailOutline,
     PeopleAltOutlined,
     Person2Outlined,
+    Settings,
     Shop2Outlined,
     TrendingUpOutlined
 } from "@mui/icons-material";
@@ -76,11 +77,11 @@ export default function AdminNav({ children }: any) {
             icon: <MailOutline />,
             link: "/admin/mailers"
         },
-        // {
-        //     title: "Others",
-        //     icon: <Shop2Outlined />,
-        //     link: "/clientarea/others"
-        // },
+        {
+            title: "Wallet",
+            icon: <Settings />,
+            link: "/admin/settings"
+        },
         // {
         //     title: "Trading Space",
         //     icon: <TrendingUpOutlined />,
