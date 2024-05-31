@@ -26,7 +26,7 @@ export default function TheForm({ currectWallet }: any) {
       window.location.reload();
     } else {
       toast("Updating...");
-      const curWallet = await axios.post("/admin/users/api", {
+      const curWallet = await axios.post("/admin/settings/api", {
         address: formData.get("address"),
       });
       setWallet([curWallet.data]);
