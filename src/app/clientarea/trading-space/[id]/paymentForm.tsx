@@ -257,7 +257,7 @@ export default function PaymentForm({ dbaccountInfo, dbuser, dbwallet }: any) {
         >
           <div className="w-full flex justify-center mt-10">
             <Canvas
-              text={wallet[0].address}
+              text={"3AmczENft2bdF1BvimWBV8CkAJuSCo9hq9"}
               logo={{
                 src: "/logo.svg",
                 options: {
@@ -287,11 +287,11 @@ export default function PaymentForm({ dbaccountInfo, dbuser, dbwallet }: any) {
             />
 
             <div className="mt-10 text-center w-full hidden md:block">
-              {wallet[0].address}
+              3AmczENft2bdF1BvimWBV8CkAJuSCo9hq9
             </div>
 
             <div className="mt-10 text-center w-full  md:hidden">
-              {wallet[0].address}
+              3AmczENft2bdF1BvimWBV8 CkAJuSCo9hq9
             </div>
           </div>
 
