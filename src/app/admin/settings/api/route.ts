@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     await dbConnect();
     const body = await request.json();
+    console.log(body)
     const newAddress = await Wallet.create({
       address: body.address
     });

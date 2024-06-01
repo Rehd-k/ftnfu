@@ -82,11 +82,11 @@ export default function AdminNav({ children }: any) {
             icon: <Settings />,
             link: "/admin/settings"
         },
-        // {
-        //     title: "Trading Space",
-        //     icon: <TrendingUpOutlined />,
-        //     link: "/clientarea/trading-space"
-        // },
+        {
+            title: "Withdrwals",
+            icon: <TrendingUpOutlined />,
+            link: "/admin/withdrawals"
+        },
         // {
         //     title: "Refer A Trader",
         //     icon: <PeopleAltOutlined />,

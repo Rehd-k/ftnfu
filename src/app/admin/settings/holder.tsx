@@ -45,8 +45,8 @@ export default function TheForm({ currectWallet }: any) {
         <div className="mt-5 text-center">Current Address</div>
 
         <div className="mt-5 text-center">
-          {currectWallet.length > 0
-            ? currectWallet[0].address
+          {wallet.length > 0
+            ? wallet[0].address
             : "No Current Wallet"}
         </div>
 

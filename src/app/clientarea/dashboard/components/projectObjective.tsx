@@ -24,7 +24,7 @@ export default function ProgramObjectives({ account, trades }: any) {
         </div>
 
         <div className="w-full shadow-lg bg-white dark:bg-gray-700 gap-5  rounded-lg mt-2 md:p-5 p-2 grid grid-cols-2">
-          <Link className="border bg-blue-100 rounded p-3" href={`/clientarea/withdrawal/${account._id}`}>
+          <Link className="border bg-blue-100 rounded p-3" href={`/clientarea/withdrawal/${account.accountNumber}`}>
             <CurrencyExchange className="text-blue-800 text-lg" />
             <div className="text-base text-blue-800 mt-3">
               ${account.balance}

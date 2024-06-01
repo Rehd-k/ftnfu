@@ -37,6 +37,8 @@ export default function PaymentForm({ dbaccountInfo, dbuser, dbwallet }: any) {
   const { Canvas } = useQRCode();
   console.log(accountInfo, user);
 
+  
+
   const account = async () => {
     toast("checking...");
     await axios.post("/clientarea/trading-space/api", {
