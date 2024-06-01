@@ -67,7 +67,8 @@ export default function HorizontalLinearStepper({ account }: any) {
         `/clientarea/withdrawal/api?id=${withdarwalData._id}`,
         {}
       );
-      toast("Done")
+      toast("Done");
+      window.location.replace("/clientarea/accounts-overview");
     } else {
       toast("Incorrect VAT code Please try again or contact Support");
     }

@@ -28,7 +28,8 @@ export async function PUT(request: NextRequest) {
   const accountId = request.nextUrl.searchParams.get("id");
 
   const accountUpdate = await Withdraw.findById(accountId);
-  accountUpdate.createdOn = Date.now();
+ 
+  accountUpdate.status = 'done'
   await accountUpdate.save();
 
   return NextResponse.json(accountUpdate);
