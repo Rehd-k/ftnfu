@@ -138,9 +138,7 @@ export default function HorizontalLinearStepper({ account }: any) {
             <Box sx={{ flex: "1 1 auto" }} />
 
             {activeStep === 1 ? null : activeStep === 0 ? (
-              <Button disabled={wallet === ""} onClick={handleNext}>
-                Next
-              </Button>
+              <Button disabled={wallet === ""} onClick={handleNext}>Next</Button>
             ) : activeStep === steps.length - 1 ? (
               <Button
                 disabled={otp.split("").length < 6}
