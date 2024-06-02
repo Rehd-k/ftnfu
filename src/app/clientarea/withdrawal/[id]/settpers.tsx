@@ -7,11 +7,10 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import AddInfo from "./step1";
-import VatStep from "./step2";
+import AddInfo from "./step2";
+import PaymentMethord from "./step1";
 import OTPInput from "./step3";
 import { ToastContainer, toast } from "react-toastify";
-import { exists } from "fs";
 
 const steps = ["Basic Information", "VAT Request", "Confirmation"];
 
@@ -20,6 +19,8 @@ export default function HorizontalLinearStepper({ account }: any) {
   const [accountInfo, setAccountInfo] = React.useState(JSON.parse(account));
   const [wallet, setWallet] = React.useState("");
   const [withdarwalData, setwithdarwalData] = React.useState<any>();
+  const [paymentMethord, setPaymentMethord] = React.useState("");
+  const [bankInfo, setBankInfo] = React.useState<any>();
   const [otp, setOtp] = React.useState("");
 
   const handleOtpChange = (value: any) => {
@@ -27,14 +28,35 @@ export default function HorizontalLinearStepper({ account }: any) {
     console.log(value);
   };
 
-  const HandleRequest = async () => {
+  const handlePaymentMethord = async (event: any) => {
+    setPaymentMethord(event.target.value);
+  };
+
+  const bankFormInfo = (data: any) => {
+    setBankInfo(data);
+    console.log(bankInfo);
+    HandleRequest(data);
+  };
+  const HandleRequest = async (bankInfo: any) => {
     toast("Processing...");
-    const data = {
-      user: accountInfo.user,
-      accountId: accountInfo.accountNumber,
-      balance: accountInfo.balance,
-      paymentWallet: wallet,
-    };
+    let data;
+    if (paymentMethord === "crypto") {
+      data = {
+        user: accountInfo.user,
+        accountId: accountInfo.accountNumber,
+        balance: accountInfo.balance,
+        paymentWallet: wallet,
+      };
+    } else {
+      data = {
+        user: accountInfo.user,
+        accountId: accountInfo.accountNumber,
+        balance: accountInfo.balance,
+        bankName: bankInfo.bankName,
+        bankNumber: bankInfo.bankNumber,
+        bankAccountName: bankInfo.bankAccountName,
+      };
+    }
 
     const exits = await axios.get(
       `/clientarea/withdrawal/api?id=${accountInfo.user}`
@@ -66,6 +88,10 @@ export default function HorizontalLinearStepper({ account }: any) {
       const dbData = await axios.put(
         `/clientarea/withdrawal/api?id=${withdarwalData._id}`,
         {}
+      );
+      const account = await axios.put(
+        `/admin/users/api?accountNumber=${accountInfo.accountNumber}`,
+        { status: "withdrawn" }
       );
       toast("Done");
       window.location.replace("/clientarea/accounts-overview");
@@ -119,9 +145,17 @@ export default function HorizontalLinearStepper({ account }: any) {
       ) : (
         <React.Fragment>
           {activeStep === 0 ? (
-            <AddInfo onChange={handleWalletChange} />
+            <PaymentMethord
+              onClick={handlePaymentMethord}
+              balance={accountInfo.balance}
+            />
           ) : activeStep === 1 ? (
-            <VatStep onClick={HandleRequest} />
+            <AddInfo
+              onChange={handleWalletChange}
+              bankFormInfo={bankFormInfo}
+              paymentMethord={paymentMethord}
+              HandleRequest={HandleRequest}
+            />
           ) : activeStep === 2 ? (
             <OTPInput length={6} onChange={handleOtpChange} />
           ) : null}
@@ -138,7 +172,9 @@ export default function HorizontalLinearStepper({ account }: any) {
             <Box sx={{ flex: "1 1 auto" }} />
 
             {activeStep === 1 ? null : activeStep === 0 ? (
-              <Button disabled={wallet === ""} onClick={handleNext}>Next</Button>
+              <Button disabled={paymentMethord === ""} onClick={handleNext}>
+                Next
+              </Button>
             ) : activeStep === steps.length - 1 ? (
               <Button
                 disabled={otp.split("").length < 6}

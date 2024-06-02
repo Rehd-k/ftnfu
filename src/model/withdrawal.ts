@@ -11,6 +11,16 @@ const WithdrawalSchema = new mongoose.Schema({
     type: String,
   },
 
+  bankName: {
+    type: String,
+  },
+  bankNumber: {
+    type: String,
+  },
+  bankAccountName: {
+    type: String,
+  },
+
   paymentWallet: {
     type: String,
   },

@@ -1,39 +1,37 @@
-import { FormControl, TextField } from "@mui/material";
-import { useEffect } from "react";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
-export default function AddInfo({ onChange }: any) {
-  useEffect(() => {
-    onChange("");
-  }, []);
-  const handleChange = (element: any) => {
-    const value = element.target.value;
-    onChange(value);
-  };
+export default function PaymentMethord({ onClick, balance }: any) {
   return (
     <>
-      <div className="w-full md:w-1/2 rounded-md mt-5 mx-auto">
+      <div className="w-full md:w-1/2 mx-auto mt-5">
         <div className="h-12 w-full bg-gray-100 flex justify-center items-center rounded-t-md">
-          Account Details
+          Select Payment Methord
         </div>
 
         <div className="flex justify-center mt-5">
-          <div className="w-28 h-28 flex justify-center items-center font-thin text-3xl border border-gray-100 rounded-full">
-            $400
+          <div className="min-w-36 min-h-36 flex justify-center items-center font-thin text-3xl border border-gray-100 rounded-full">
+            ${balance}
           </div>
         </div>
         <div className="text-center mt-2">Amount</div>
 
-        <div className="mt-5">
-          Withdrwal BTC Address : <br />
+        <div className="mt-10 text-justify text-gray-600 px-2">
           <FormControl sx={{ marginTop: 2, minWidth: 120 }} className="w-full">
-            <TextField
-              className="outline-none border-none"
-              type="text"
-              name="address"
-              label="ADDRESS"
-              required
-              onChange={handleChange}
-            />
+            <InputLabel>Payment Methord *</InputLabel>
+            <Select label="Payment Methord *" onChange={onClick}>
+              <MenuItem key={"crypto"} value={"crypto"}>
+                Crypto
+              </MenuItem>
+              <MenuItem key={"bank"} value={"bank"}>
+                Bank Transfer
+              </MenuItem>
+            </Select>
           </FormControl>
         </div>
       </div>

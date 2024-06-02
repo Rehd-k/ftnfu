@@ -7,13 +7,24 @@ const nanoid = customAlphabet("1234567890", 6);
 export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
-  const { user, accountId, balance, paymentWallet } = body;
+  const {
+    user,
+    accountId,
+    balance,
+    paymentWallet,
+    bankName,
+    bankNumber,
+    bankAccountName,
+  } = body;
   console.log(body);
   const account = await Withdraw.create({
     user,
     accountId,
     balance,
     paymentWallet,
+    bankName,
+    bankNumber,
+    bankAccountName,
     VAT: nanoid(),
   });
 
@@ -22,28 +33,27 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(account);
 }
 
-
 export async function PUT(request: NextRequest) {
   await dbConnect();
   const accountId = request.nextUrl.searchParams.get("id");
 
   const accountUpdate = await Withdraw.findById(accountId);
- 
-  accountUpdate.status = 'done'
+
+  accountUpdate.status = "done";
   await accountUpdate.save();
 
   return NextResponse.json(accountUpdate);
 }
 
-
 export async function GET(request: NextRequest) {
-    await dbConnect();
-    const user = request.nextUrl.searchParams.get("id");
-  
-    const accountUpdate = await Withdraw.findOne({
-        user 
-    }).where('status').equals('processing');
-  
-    return NextResponse.json(accountUpdate);
-  }
-  
+  await dbConnect();
+  const user = request.nextUrl.searchParams.get("id");
+
+  const accountUpdate = await Withdraw.findOne({
+    user,
+  })
+    .where("status")
+    .equals("processing");
+
+  return NextResponse.json(accountUpdate);
+}

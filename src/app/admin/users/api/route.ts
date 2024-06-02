@@ -7,7 +7,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   await dbConnect();
   const accountId = request.nextUrl.searchParams.get("id");
-  const user = await User.find({});
+  let user;
+  if (accountId && accountId !== "") {
+    user = Account.findOne({
+      accountNumber: accountId,
+    });
+  } else {
+    user = await User.find({});
+  }
 
   return NextResponse.json(user);
 }
@@ -30,8 +37,18 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   await dbConnect();
   const accountId = request.nextUrl.searchParams.get("id");
+  const accountNumber = request.nextUrl.searchParams.get("accountNumber");
+  let accountUpdate;
+  if (accountId && accountId !== "") {
+    accountUpdate = await Account.findById(accountId);
+  }
 
-  const accountUpdate = await Account.findById(accountId);
+  if (accountNumber && accountNumber !== "") {
+    accountUpdate = await Account.findOne({
+      accountNumber: accountNumber,
+    });
+  }
+
   const body = await request.json();
   for (const key in body) {
     accountUpdate[key] = body[key];

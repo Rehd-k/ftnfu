@@ -57,7 +57,8 @@ const AccountSchema = new mongoose.Schema({
             'processing',
             'blocked',
             'active',
-            'inactive'
+            'inactive',
+            'withdrawn'
         ]
     },
     createdOn: {

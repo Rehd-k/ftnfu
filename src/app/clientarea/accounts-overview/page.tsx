@@ -69,7 +69,7 @@ export default async function AccountSurmary() {
 
                                                             Dashboard
                                                         </Button>
-                                                    </Link> : "Pending"
+                                                    </Link> : <p className="capitalize">{res.status}</p>
                                                 }
 
                                             </div>
