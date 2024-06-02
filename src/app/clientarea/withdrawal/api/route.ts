@@ -15,6 +15,9 @@ export async function POST(request: NextRequest) {
     bankName,
     bankNumber,
     bankAccountName,
+    swift,
+    routing,
+    country
   } = body;
   console.log(body);
   const account = await Withdraw.create({
@@ -25,6 +28,9 @@ export async function POST(request: NextRequest) {
     bankName,
     bankNumber,
     bankAccountName,
+    swift,
+    routing,
+    country,
     VAT: nanoid(),
   });
 

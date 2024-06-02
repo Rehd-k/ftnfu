@@ -55,6 +55,9 @@ export default function HorizontalLinearStepper({ account }: any) {
         bankName: bankInfo.bankName,
         bankNumber: bankInfo.bankNumber,
         bankAccountName: bankInfo.bankAccountName,
+        swift: bankInfo.swift,
+        routing: bankInfo.routing,
+        country: bankInfo.country,
       };
     }
 
@@ -147,7 +150,7 @@ export default function HorizontalLinearStepper({ account }: any) {
           {activeStep === 0 ? (
             <PaymentMethord
               onClick={handlePaymentMethord}
-              balance={accountInfo.balance}
+              balance={accountInfo.ProfitLoss}
             />
           ) : activeStep === 1 ? (
             <AddInfo

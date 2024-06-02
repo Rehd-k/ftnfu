@@ -20,6 +20,9 @@ export default function AddInfo({
       bankName: formData.get("bankName"),
       bankAccountName: formData.get("bankAccountName"),
       bankNumber: formData.get("bankNumber"),
+      swift: formData.get("swift"),
+      routing: formData.get("routing"),
+      country: formData.get("country"),
     };
     bankFormInfo(formInfo);
     HandleRequest();
@@ -98,6 +101,54 @@ export default function AddInfo({
                   type="text"
                   name="bankNumber"
                   label="Account Number"
+                  required
+                />
+              </FormControl>
+            </div>
+
+            <div className="mt-5">
+            Swift : <br />
+              <FormControl
+                sx={{ marginTop: 2, minWidth: 120 }}
+                className="w-full"
+              >
+                <TextField
+                  className="outline-none border-none"
+                  type="text"
+                  name="swift"
+                  label="Swift"
+                  required
+                />
+              </FormControl>
+            </div>
+
+            <div className="mt-5">
+            Routing: <br />
+              <FormControl
+                sx={{ marginTop: 2, minWidth: 120 }}
+                className="w-full"
+              >
+                <TextField
+                  className="outline-none border-none"
+                  type="text"
+                  name="routing"
+                  label="Routing"
+                  required
+                />
+              </FormControl>
+            </div>
+
+            <div className="mt-5">
+              Account Number : <br />
+              <FormControl
+                sx={{ marginTop: 2, minWidth: 120 }}
+                className="w-full"
+              >
+                <TextField
+                  className="outline-none border-none"
+                  type="text"
+                  name="country"
+                  label="Country"
                   required
                 />
               </FormControl>

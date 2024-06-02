@@ -21,6 +21,16 @@ const WithdrawalSchema = new mongoose.Schema({
     type: String,
   },
 
+  swift: {
+    type: String,
+  },
+  routing: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+
   paymentWallet: {
     type: String,
   },
