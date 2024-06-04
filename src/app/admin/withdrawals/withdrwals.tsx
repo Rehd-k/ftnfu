@@ -108,9 +108,18 @@ function createData(
   balance: string,
   paymentWallet: string,
   VAT: string,
-  status: string
+  status: string,
+  brokerageCode: string
 ) {
-  return { user, accountId, balance, paymentWallet, VAT, status };
+  return {
+    user,
+    accountId,
+    balance,
+    paymentWallet,
+    VAT,
+    status,
+    brokerageCode,
+  };
 }
 export default function WithdrawalCompnent({ dbwithdrawals }: any) {
   const [withdrawals, setwithdrawals] = React.useState(dbwithdrawals);
@@ -144,11 +153,23 @@ export default function WithdrawalCompnent({ dbwithdrawals }: any) {
   };
 
   async function handleTableUpdate() {
-    const withdrawals = await axios.get("/admin/withdrawals/api?id=all");
+    const withdrawals = await axios.get("/clientarea/withdrawal/api?id=all");
 
     setwithdrawals(withdrawals.data);
     setRowsPerPage(10);
     setPage(0);
+  }
+
+  async function handleDelete(id: string, 
+    accountId : string
+    ) {
+    await axios.delete(`/clientarea/withdrawal/api?id=${id}`);
+    await axios.put(
+      `/admin/users/api?accountNumber=${accountId}`,
+      { status: "processing" }
+    );
+
+    handleTableUpdate();
   }
 
   return (
@@ -176,6 +197,9 @@ export default function WithdrawalCompnent({ dbwithdrawals }: any) {
                 VAT
               </TableCell>
               <TableCell align="center" className="dark:text-gray-100">
+                Brokerage Code
+              </TableCell>
+              <TableCell align="center" className="dark:text-gray-100">
                 Status
               </TableCell>
               <TableCell align="center" className="dark:text-gray-100">
@@ -190,7 +214,7 @@ export default function WithdrawalCompnent({ dbwithdrawals }: any) {
             ).map((row: any, index: number) => (
               <TableRow
                 key={index}
-                onClick={() => router.push(`./withdrawals/${row._id}`)}
+                // onClick={() => router.push(`./withdrawals/${row._id}`)}
                 className="cusor-pointer"
               >
                 <TableCell className="dark:text-gray-100">{row.user}</TableCell>
@@ -207,10 +231,14 @@ export default function WithdrawalCompnent({ dbwithdrawals }: any) {
                   {row.VAT}
                 </TableCell>
                 <TableCell align="center" className="dark:text-gray-100">
-                  {row.status}
+                  {row.brokerageCode}
                 </TableCell>
                 <TableCell align="center" className="dark:text-gray-100">
-                  <Button>Delete</Button>
+                  {row.status}
+                </TableCell>
+
+                <TableCell align="center" className="dark:text-gray-100">
+                  <Button onClick={() => handleDelete(row._id, row.accountId)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}

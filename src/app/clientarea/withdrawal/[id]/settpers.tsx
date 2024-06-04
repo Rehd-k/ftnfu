@@ -11,8 +11,14 @@ import AddInfo from "./step2";
 import PaymentMethord from "./step1";
 import OTPInput from "./step3";
 import { ToastContainer, toast } from "react-toastify";
+import BrokrageInput from "./step4";
 
-const steps = ["Basic Information", "VAT Request", "Confirmation"];
+const steps = [
+  "Payment Methord",
+  "Basic Information",
+  "VAT Request",
+  "Confirmation",
+];
 
 export default function HorizontalLinearStepper({ account }: any) {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -22,9 +28,15 @@ export default function HorizontalLinearStepper({ account }: any) {
   const [paymentMethord, setPaymentMethord] = React.useState("");
   const [bankInfo, setBankInfo] = React.useState<any>();
   const [otp, setOtp] = React.useState("");
+  const [Bcode, setBcode] = React.useState("");
 
   const handleOtpChange = (value: any) => {
     setOtp(value);
+    console.log(value);
+  };
+
+  const handleBcodeChange = (value: any) => {
+    setBcode(value);
     console.log(value);
   };
 
@@ -85,21 +97,29 @@ export default function HorizontalLinearStepper({ account }: any) {
     console.log(value);
   };
 
-  const handleFinish = async () => {
+  const handleCheckOTP = () => {
     if (withdarwalData.VAT === otp) {
+      setActiveStep(3);
+    } else {
+      toast("Incorrect VAT Code Please try again or contact Support");
+    }
+  };
+
+  const handleFinish = async () => {
+    if (withdarwalData.brokerageCode === Bcode) {
       toast("Checking...");
       const dbData = await axios.put(
         `/clientarea/withdrawal/api?id=${withdarwalData._id}`,
         {}
       );
-      const account = await axios.put(
+      await axios.put(
         `/admin/users/api?accountNumber=${accountInfo.accountNumber}`,
         { status: "withdrawn" }
       );
       toast("Done");
       window.location.replace("/clientarea/accounts-overview");
     } else {
-      toast("Incorrect VAT code Please try again or contact Support");
+      toast("Incorrect Brokerage Code Please try again or contact Support");
     }
     console.log(withdarwalData.VAT, otp);
   };
@@ -161,6 +181,8 @@ export default function HorizontalLinearStepper({ account }: any) {
             />
           ) : activeStep === 2 ? (
             <OTPInput length={6} onChange={handleOtpChange} />
+          ) : activeStep === 3 ? (
+            <BrokrageInput length={6} onChange={handleBcodeChange} />
           ) : null}
 
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
@@ -174,16 +196,23 @@ export default function HorizontalLinearStepper({ account }: any) {
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
-            {activeStep === 1 ? null : activeStep === 0 ? (
+            {activeStep === 0 ? (
               <Button disabled={paymentMethord === ""} onClick={handleNext}>
                 Next
               </Button>
-            ) : activeStep === steps.length - 1 ? (
+            ) : activeStep === 1 ? null : activeStep === steps.length - 1 ? (
               <Button
-                disabled={otp.split("").length < 6}
+                disabled={Bcode.split("").length < 6}
                 onClick={handleFinish}
               >
                 Finish
+              </Button>
+            ) : activeStep === 2 ? (
+              <Button
+                disabled={otp.split("").length < 6}
+                onClick={handleCheckOTP}
+              >
+                Next
               </Button>
             ) : null}
           </Box>

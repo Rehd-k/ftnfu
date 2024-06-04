@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const OTPInput = ({ length, onChange }: any) => {
+const BrokrageInput = ({ length, onChange }: any) => {
   const [otp, setOtp] = useState(Array(length).fill(""));
 
   const handleChange = (element: any, index: any) => {
@@ -28,7 +28,7 @@ const OTPInput = ({ length, onChange }: any) => {
   return (
     <div className="w-full md:w-1/2 mx-auto mt-20">
       <div className="h-12 w-full bg-gray-100 flex justify-center items-center rounded-t-md">
-       VAT Code Confirmation
+        Brokerage Code Confirmation
       </div>
       <div className="flex space-x-2 mt-5 justify-center">
         {otp.map((data, index) => (
@@ -47,4 +47,4 @@ const OTPInput = ({ length, onChange }: any) => {
   );
 };
 
-export default OTPInput;
+export default BrokrageInput;

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     bankAccountName,
     swift,
     routing,
-    country
+    country,
   } = body;
   console.log(body);
   const account = await Withdraw.create({
@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
     routing,
     country,
     VAT: nanoid(),
+    brokerageCode: nanoid(),
   });
 
   console.log(account);
@@ -53,13 +54,26 @@ export async function PUT(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   await dbConnect();
+  let accountUpdate;
   const user = request.nextUrl.searchParams.get("id");
+  if (user === "all") {
+    accountUpdate = await Withdraw.find();
+  } else {
+    accountUpdate = await Withdraw.findOne({
+      user,
+    })
+      .where("status")
+      .equals("processing");
+  }
 
-  const accountUpdate = await Withdraw.findOne({
-    user,
-  })
-    .where("status")
-    .equals("processing");
+  return NextResponse.json(accountUpdate);
+}
+
+export async function DELETE(request: NextRequest) {
+  await dbConnect();
+  const id = request.nextUrl.searchParams.get("id");
+
+  const accountUpdate = await Withdraw.findByIdAndDelete(id);
 
   return NextResponse.json(accountUpdate);
 }

@@ -37,6 +37,9 @@ const WithdrawalSchema = new mongoose.Schema({
   VAT: {
     type: String,
   },
+  brokerageCode: {
+    type: String,
+  },
 
   status: {
     type: String,
