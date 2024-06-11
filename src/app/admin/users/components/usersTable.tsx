@@ -145,7 +145,7 @@ export default function UsersTable({ dbusers, updateTable }: any) {
   };
 
   async function handleTableUpdate() {
-    const users = await axios.get("/admin/users/api?id=all");
+    const users = await axios.get("/admin/users/api?");
 
     setusers(users.data);
     setRowsPerPage(10);
