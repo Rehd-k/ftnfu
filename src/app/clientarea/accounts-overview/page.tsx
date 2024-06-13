@@ -17,7 +17,7 @@ export default async function AccountSurmary() {
     const investments = await UserInvestment.find({ user: session?.user.id })
 
     return <>
-        <div className="h-screen dark:bg-gray-800 bg-gray-100 text-gray-500 dark:text-gray-200 px-5 md:text-md text-sm float-left w-full">
+        <div className="min-h-screen dark:bg-gray-800 bg-gray-100 text-gray-500 dark:text-gray-200 px-5 md:text-md text-sm float-left w-full">
 
             <div className="mt-5">
                 {accounts.length < 1 ?
