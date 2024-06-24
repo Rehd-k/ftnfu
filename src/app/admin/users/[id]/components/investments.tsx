@@ -153,7 +153,7 @@ export default function UserInvestments({ dbprops }: any) {
           </li>
         </ul>
 
-        <div className="mt-5 grid grid-cols-2 px-2 gap-1 pb-5">
+        <div className="mt-5 px-2 gap-1 pb-5">
           <button
             onClick={() => doUpdate("status", {})}
             className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
@@ -161,12 +161,7 @@ export default function UserInvestments({ dbprops }: any) {
             {props.status !== "active" ? "Activate" : "Deactivate"}
           </button>
 
-          <button
-            onClick={handleBalanceOpen}
-            className="w-full py-2 mt-5 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            Update
-          </button>
+          
         </div>
       </div>
       <ToastContainer />
