@@ -143,7 +143,7 @@ export default function UserInvestments({ dbprops }: any) {
           <li className="flex justify-between py-2 border-b border-gray-300">
             <p className="">Since</p>
             <p className="">
-              {new Date(Number(props.createdOn)).toLocaleTimeString()}
+              {new Date(Number(props.createdOn)).toLocaleDateString()}
             </p>
           </li>
 
