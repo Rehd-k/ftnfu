@@ -2,6 +2,7 @@ import dbConnect from "@/helpers/dbConnect";
 import Account from "@/model/accounts";
 import Trade from "@/model/trades";
 import User from "@/model/user";
+import UserInvestment from "@/model/userinvestments";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -38,24 +39,33 @@ export async function PUT(request: NextRequest) {
   await dbConnect();
   const accountId = request.nextUrl.searchParams.get("id");
   const accountNumber = request.nextUrl.searchParams.get("accountNumber");
+  const investmentid = request.nextUrl.searchParams.get("investmentid");
   let accountUpdate;
-  if (accountId && accountId !== "") {
-    accountUpdate = await Account.findById(accountId);
-  }
+  try {
+    if (accountId && accountId !== "") {
+      accountUpdate = await Account.findById(accountId);
+    }
 
-  if (accountNumber && accountNumber !== "") {
-    accountUpdate = await Account.findOne({
-      accountNumber: accountNumber,
-    });
-  }
+    if (accountNumber && accountNumber !== "") {
+      accountUpdate = await Account.findOne({
+        accountNumber: accountNumber,
+      });
+    }
 
-  const body = await request.json();
-  for (const key in body) {
-    accountUpdate[key] = body[key];
-  }
-  await accountUpdate.save();
+    if (investmentid && investmentid !== "") {
+      accountUpdate = await UserInvestment.findById(investmentid);
+    }
 
-  return NextResponse.json(accountUpdate);
+    const body = await request.json();
+    console.log(body);
+    for (const key in body) {
+      accountUpdate[key] = body[key];
+    }
+    await accountUpdate.save();
+    return NextResponse.json(accountUpdate);
+  } catch (err) {
+    return NextResponse.error();
+  }
 }
 
 export async function DELETE(request: NextRequest) {

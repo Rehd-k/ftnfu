@@ -4,10 +4,10 @@ import dbConnect from "@/helpers/dbConnect";
 
 export default async function UsersAdmin() {
   await dbConnect();
-  let dbusers = (await User.find()).map(user => user.toJSON());
+  let dbusers = await User.find();
   return (
     <>
-      <UsersTable dbusers={dbusers}/>
+      <UsersTable dbusers={JSON.stringify(dbusers)}/>
     </>
   );
 }

@@ -113,8 +113,8 @@ function createData(
   return { firstName, lastName, password, email, country, status, Joined };
 }
 
-export default function UsersTable({ dbusers, updateTable }: any) {
-  const [users, setusers] = React.useState(dbusers);
+export default function UsersTable({ dbusers }: any) {
+  const [users, setusers] = React.useState(JSON.parse(dbusers));
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const router = useRouter();
@@ -124,7 +124,7 @@ export default function UsersTable({ dbusers, updateTable }: any) {
   );
 
   React.useEffect(() => {
-    setusers(dbusers);
+    setusers(JSON.parse(dbusers));
   }, [dbusers]);
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
