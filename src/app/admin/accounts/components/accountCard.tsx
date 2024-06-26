@@ -39,7 +39,7 @@ export default function AccountCard({ prop }:any) {
 
             <ul className="mt-5 px-4 md:text-sm text-xs font-semibold">
                 <li className="flex justify-between py-2 border-b border-gray-300">
-                    <p className="">Buying Power</p>
+                    <p className="">Trading Capital</p>
                     <p className="">$ {props.buyingPower}</p>
                 </li>
 

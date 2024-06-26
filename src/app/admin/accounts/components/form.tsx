@@ -31,7 +31,7 @@ const validationSchema = yup.object({
         .required('Price is required'),
     buyingPower: yup
         .string()
-        .required('Buying Power is required'),
+        .required('Trading Capital is required'),
     pofitTraget: yup
         .string()
         .required('Pofit Traget is required'),
@@ -162,7 +162,7 @@ export default function PlanForm({ isOpen, handleClose, formContent }: any) {
                             className="outline-none border-none"
                             type="text"
                             name="buyingPower"
-                            label="Buying Power *"
+                            label="Trading Capital *"
                             value={formIk.values.buyingPower}
                             onChange={formIk.handleChange}
                             onBlur={formIk.handleBlur}

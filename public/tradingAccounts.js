@@ -29,7 +29,7 @@ $(document).ready(() => {
                 <ul>
 
                     <li>
-                        <p class="main__text sm color-black ">Buying Power <span
+                        <p class="main__text sm color-black ">Trading Capital <span
                                 class='info-point'></span></p>
                         <div class="main__subtitle xs color-black">$ ${item.buyingPower}</div>
                         <p class="main__text sm color-black wide-text info-point__desc">Max position
