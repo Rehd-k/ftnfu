@@ -10,12 +10,25 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function OTPMailer({ dbUsers, sendMail }: any) {
-  const [users] = useState(JSON.parse(dbUsers));
+  const [users, setUsers] = useState(JSON.parse(dbUsers));
   const [usersToMail, setUsersToMail] = useState<any[]>([]);
   const [count, setCount] = useState(0);
+
+  async function updateUserList() {
+    toast("Updating...");
+    const users = await axios.get("/admin/users/api");
+    setUsers(users.data);
+    toast("Done");
+  }
+
+  useEffect(() => {
+    updateUserList();
+  }, []);
 
   function addUser(newUser: any) {
     const { firstName, email } = newUser.target.value;
@@ -34,7 +47,8 @@ export default function OTPMailer({ dbUsers, sendMail }: any) {
     setCount(counter);
   }
 
-  function handleSubmit(formData: FormData) {
+  async function handleSubmit(formData: FormData) {
+    toast("sending...");
     const mailInfo = {
       subject: formData.get("subject"),
       reason: formData.get("reason"),
@@ -42,15 +56,28 @@ export default function OTPMailer({ dbUsers, sendMail }: any) {
       recivers: usersToMail,
     };
     for (const iterator of mailInfo.recivers) {
-      sendMail(
-        mailInfo.subject,
-        iterator.email,
-        otpMail(iterator.firstName, mailInfo.otp, mailInfo.reason)
-      );
+      try {
+        await sendMail(
+          mailInfo.subject,
+          iterator.email,
+          otpMail(iterator.firstName, mailInfo.otp, mailInfo.reason)
+        );
+      } catch (err) {
+        toast(
+          "An Error occured, one or more of more of your users will not get the email",
+          { type: "error" }
+        );
+      }
     }
+    toast("Finished");
   }
   return (
     <>
+      <div className="flex justify-center">
+        <Button variant="outlined" onClick={updateUserList}>
+          Update Users
+        </Button>
+      </div>
       <div className="w-full h-full md:p-5 p-2">
         <div className="py-4 text-center font-bold">OTP Mailer</div>
         <div className="overflow-x-scroll w-full h-20 flex items-center">
@@ -139,6 +166,7 @@ export default function OTPMailer({ dbUsers, sendMail }: any) {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

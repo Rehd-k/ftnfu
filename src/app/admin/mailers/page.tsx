@@ -15,7 +15,11 @@ export default async function Mailers() {
 
   async function sendGeneralMail(subject: string, reciver: string, email: any) {
     "use server";
-    await sendMail(subject, reciver, email);
+    try {
+      await sendMail(subject, reciver, email);
+    } catch (error) {
+      return error;
+    }
   }
   return (
     <>

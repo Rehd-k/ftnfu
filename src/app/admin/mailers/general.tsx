@@ -10,13 +10,25 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function GeneralMailer({ dbUsers, sendMail }: any) {
-  const [users] = useState(JSON.parse(dbUsers));
+  const [users, setUsers] = useState(JSON.parse(dbUsers));
   const [usersToMail, setUsersToMail] = useState<any[]>([]);
   const [count, setCount] = useState(0);
+
+  async function updateUserList() {
+    toast("updating users");
+    const users = await axios.get("/admin/users/api");
+    setUsers(users.data);
+    toast("Done");
+  }
+
+  useEffect(() => {
+    updateUserList();
+  }, []);
 
   function addUser(newUser: any) {
     const { firstName, email } = newUser.target.value;
@@ -35,7 +47,7 @@ export default function GeneralMailer({ dbUsers, sendMail }: any) {
     setCount(counter);
   }
 
-  function handleSubmit(formData: FormData) {
+  async function handleSubmit(formData: FormData) {
     const mailInfo = {
       subject: formData.get("subject"),
       reason: formData.get("reason"),
@@ -47,24 +59,36 @@ export default function GeneralMailer({ dbUsers, sendMail }: any) {
     };
     for (const iterator of mailInfo.recivers) {
       toast(`Now sending Mail to ${iterator.firstName}`, {
-        type : 'info'
+        type: "info",
       });
-      sendMail(
-        mailInfo.subject,
-        iterator.email,
-        GeneralMail(
-          mailInfo.body,
-          mailInfo.action_link,
-          mailInfo.action_display,
-          iterator.firstName,
-          mailInfo.subtext,
-          mailInfo.reason
-        )
-      );
+      try {
+        await sendMail(
+          mailInfo.subject,
+          iterator.email,
+          GeneralMail(
+            mailInfo.body,
+            mailInfo.action_link,
+            mailInfo.action_display,
+            iterator.firstName,
+            mailInfo.subtext,
+            mailInfo.reason
+          )
+        );
+      } catch (error) {
+        toast(
+          "An Error Occured One or more of your users wont recive the Email"
+        );
+      }
     }
+    toast("Done");
   }
   return (
     <>
+      <div className="flex justify-center">
+        <Button variant="outlined" onClick={updateUserList}>
+          Update Users
+        </Button>
+      </div>
       <div className="w-full h-full md:p-5 p-2">
         <div className="py-4 text-center font-bold">General Mailer</div>
         <div className="overflow-x-scroll w-full h-20 flex items-center">

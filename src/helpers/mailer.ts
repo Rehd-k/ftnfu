@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export async function sendMail(subject: string, to: string, body: any) {
-console.log(subject, to)
+  console.log(subject, to);
   const transporter = nodemailer.createTransport({
     host: "smtppro.zoho.com",
     port: 465,
@@ -16,7 +16,7 @@ console.log(subject, to)
     console.log("verifcation Success");
   } catch (err) {
     console.log(err, "verifcation error");
-    return;
+    return err;
   }
 
   var mailOptions = {
@@ -31,5 +31,6 @@ console.log(subject, to)
     console.log(email);
   } catch (error) {
     console.log(error, "verifcation error");
+    return error;
   }
 }
