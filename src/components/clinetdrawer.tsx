@@ -122,21 +122,7 @@ export default function ClientDrawer({ user, children }: any) {
 
   return (
     <>
-      <div className="gtranslate_wrapper"></div>
-      <Script defer src="https://code.tidio.co/1if1x0oyypjqc2xkcrnhnayhjnvfgjca.js" />
-      <Script defer src="https://cdn.gtranslate.net/widgets/latest/float.js" />
       <Script
-        defer
-        id="show-livechat"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          __html: `window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"languages":["en","fr","de","it","es"],"wrapper_selector":".gtranslate_wrapper"}`,
-        }}
-        onLoad={() => {
-          console.log("Script has loaded");
-        }}
-      />
-      {/* <Script
         defer
         id="show-livechat"
         type="text/javascript"
@@ -153,7 +139,20 @@ export default function ClientDrawer({ user, children }: any) {
         onLoad={() => {
           console.log("Script has loaded");
         }}
-      /> */}
+      />
+      <div className="gtranslate_wrapper"></div>
+      <Script defer src="https://cdn.gtranslate.net/widgets/latest/float.js" />
+      <Script
+        defer
+        id="show-livechat"
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"languages":["en","fr","de","it","es"],"wrapper_selector":".gtranslate_wrapper"}`,
+        }}
+        onLoad={() => {
+          console.log("Script has loaded");
+        }}
+      />
 
       <Box sx={{ display: "flex" }}>
         {/* <CssBaseline /> */}
